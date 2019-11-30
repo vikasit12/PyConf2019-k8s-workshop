@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: celery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery-service
+  template:
+    spec:
+      containers:
+      - image: vikasit/celery_service:1.0
+        imagePullPolicy: IfNotPresent
+        name: celery-app
+      hostname: celery
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - until nslookup redis; do echo waiting for redis; sleep 2; done;
+        image: busybox:latest
+        imagePullPolicy: Always
+        name: init-redis
+      restartPolicy: Always

@@ -1,0 +1,29 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: app
+  template:
+    spec:
+      containers:
+      - image: vikasit/flask_service:1.0
+        imagePullPolicy: IfNotPresent
+        name: flask-app
+        ports:
+        - containerPort: 5001
+          protocol: TCP
+      hostname: app
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - until nslookup redis; do echo waiting for redis; sleep 2; done;
+        image: busybox:latest
+        imagePullPolicy: Always
+        name: init-redis
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
