@@ -1,13 +1,20 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
+  labels:
+    service: app
   name: app
 spec:
   replicas: 1
   selector:
     matchLabels:
       service: app
+  strategy:
+    type: RollingUpdate
   template:
+    metadata:
+      labels:
+        service: app
     spec:
       containers:
       - image: vikasit/flask_service:1.0
@@ -27,3 +34,4 @@ spec:
         name: init-redis
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
+
