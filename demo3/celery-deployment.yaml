@@ -1,0 +1,47 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: celery-service
+  name: celery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery-service
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: celery-service
+    spec:
+      containers:
+      - image: vikasit/celery_service:1.0
+        imagePullPolicy: IfNotPresent
+        name: celery-app
+        resources:
+          limits:
+            cpu: 500m
+            memory: "52428800"
+          requests:
+            cpu: 250m
+            memory: "26214400"
+        volumeMounts:
+        - mountPath: /var/local/
+          name: celery-vol-claim
+      hostname: celery
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - until nslookup redis; do echo waiting for redis; sleep 2; done;
+        image: busybox:latest
+        imagePullPolicy: Always
+        name: init-redis
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: celery-vol-claim
+        persistentVolumeClaim:
+          claimName: celery-claim

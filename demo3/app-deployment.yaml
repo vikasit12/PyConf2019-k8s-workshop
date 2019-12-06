@@ -1,0 +1,48 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    service: app
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: app
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        service: app
+    spec:
+      containers:
+      - image: vikasit/flask_service:1.0
+        imagePullPolicy: IfNotPresent
+        name: flask-app
+        ports:
+        - containerPort: 5001
+          protocol: TCP
+        env:
+        - name: HIGHER_ENV_ENABLED
+          value: "FALSE"
+        - name: VAULT_ENABLE
+          value: "FALSE"
+        volumeMounts:
+        - mountPath: /var/local/
+          name: vol-claim
+      hostname: app
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - until nslookup redis; do echo waiting for redis; sleep 2; done;
+        image: busybox:latest
+        imagePullPolicy: Always
+        name: init-redis
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: vol-claim
+        persistentVolumeClaim:
+          claimName: app-claim
