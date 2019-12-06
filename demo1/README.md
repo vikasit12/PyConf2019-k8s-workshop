@@ -257,7 +257,7 @@ some-app-9f8669565-pwkkj   1/1     Running   0          8s
 Resources to refer:
 * https://www.weave.works/blog/kubernetes-deployment-strategies
 * https://blog.container-solutions.com/kubernetes-deployment-strategies
-* Try creating slides for it: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment
+* https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment
 
 ### Scale deployment:
 ```
