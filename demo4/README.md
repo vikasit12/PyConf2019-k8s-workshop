@@ -1,4 +1,4 @@
-# Demo 4 - StatefulSets, StorageClass and RollOut
+# Demo 4
 
 
 ## Agenda
@@ -6,6 +6,7 @@
 * StatefulSets
 * StorageClass
 * RollOut
+* Secrets
 
 ### Setup Cassandra
 
