@@ -28,6 +28,16 @@ cassandra-1   1/1     Running   0          16m
 cassandra-2   1/1     Running   0          15m
 ```
 
+## Check how secret works
+
+```sh
+# create a secret with 2 key value pairs
+$ kubectl create secret generic test-secret --from-literal=username='user1' --from-literal=password='password'
+
+secret/test-secret created
+# this secret can be accessed as environment variable or volume mount. In this sts.yaml we are using it as env var.
+```
+
 ## Check how rollout works
 
 ```sh
@@ -44,4 +54,4 @@ statefulset.apps/cassandra patched
 * [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 * [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/)
 * [Rollout](https://medium.com/platformer-blog/enable-rolling-updates-in-kubernetes-with-zero-downtime-31d7ec388c81)
-
+* [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/)

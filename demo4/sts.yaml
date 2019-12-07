@@ -66,6 +66,16 @@ spec:
             valueFrom:
               fieldRef:
                 fieldPath: status.podIP
+          - name: BACKEND_USERNAME
+            valueFrom:
+              secretKeyRef:
+               name: test-secret
+               key: username
+          - name: BACKEND_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: test-secret
+                key: password
         readinessProbe:
           exec:
             command:
