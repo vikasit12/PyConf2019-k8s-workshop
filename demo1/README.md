@@ -12,7 +12,8 @@
 * Expose deployments
 
 ### Cluster information
-```arunc@arun:~$ kubectl get nodes
+```
+arunc@arun:~$ kubectl get nodes
 NAME                                           STATUS   ROLES    AGE   VERSION
 gke-pyconfhyd-k8s-default-pool-794066aa-3lxr   Ready    <none>   19h   v1.13.11-gke.14
 gke-pyconfhyd-k8s-default-pool-794066aa-6q2j   Ready    <none>   19h   v1.13.11-gke.14
@@ -42,10 +43,11 @@ kube-system           Active   19h
 ``` 
 ### Which namespaces am in ?
 ```
+arunc@arun:~$ kubectl config get-contexts
 CURRENT   NAME                                            CLUSTER                                         AUTHINFO                                        NAMESPACE
 *         gke_pyconfhyd2019_us-central1-a_pyconfhyd-k8s   gke_pyconfhyd2019_us-central1-a_pyconfhyd-k8s   gke_pyconfhyd2019_us-central1-a_pyconfhyd-k8s   default
 ```
-### add something
+### Pods from other namespace
 
 ```
 arunc@arun:~$ kubectl get pods --namespace kube-system
@@ -68,7 +70,7 @@ prometheus-to-sd-89hch                                    2/2     Running   0   
 prometheus-to-sd-nfxmj                                    2/2     Running   0          19h
 prometheus-to-sd-w4bmc                                    2/2     Running   0          19h
 ```
-### adfadfadsf
+
 ```
 arunc@arun:~$ kubectl get pods --namespace kube-public
 No resources found in kube-public namespace.
@@ -92,6 +94,8 @@ arunc@arun:~$ kubectl get pods
 NAME                       READY   STATUS    RESTARTS   AGE
 some-app-9f8669565-k7dbd   1/1     Running   0          18s
 ```
+
+### Hoping into pod
 ```
 arunc@arun:~$ kubectl exec -it some-app-9f8669565-k7dbd /bin/bash
 
@@ -245,10 +249,15 @@ some-app-9f8669565-pwkkj   1/1     Running   0          8s
 #### Self Healing --- Checked
 
 
-#### Deployment: 
+#### Deployment:
+* provides declarative updates for pods and replicasets.
+* describe a desired state in a Deployment.
+* create new ReplicaSets, or to remove existing Deployments and adopt all their resources with new Deployments.
+
+Resources to refer:
 * https://www.weave.works/blog/kubernetes-deployment-strategies
 * https://blog.container-solutions.com/kubernetes-deployment-strategies
-* Try creating slides for it: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment
+* https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment
 
 ### Scale deployment:
 ```
@@ -387,7 +396,7 @@ This is 1
 arunc@arun:~$ curl http://34.69.3.148:80
 This is 1
 ```
-#### 		---- Loadbalancing Done ----------
+#### 		---- Loadbalancing Checked ----------
 
 ```
 arunc@arun:~$ kubectl get service

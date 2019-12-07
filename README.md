@@ -19,3 +19,6 @@
 Please go through with these links for respective demos covered in slides -
 
 * [Demo1](https://github.com/vikasit12/PyConf2019-k8s-workshop/blob/master/demo1/README.md)
+* [Demo2](https://github.com/vikasit12/PyConf2019-k8s-workshop/blob/master/demo2/README.md)
+* [Demo3](https://github.com/vikasit12/PyConf2019-k8s-workshop/blob/master/demo3/README.md)
+* [Demo4](https://github.com/vikasit12/PyConf2019-k8s-workshop/blob/master/demo4/README.md)
