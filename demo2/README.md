@@ -3,13 +3,14 @@
 
 ## Changes from previous demo
 
-Coming to changes we have in this demo from previous one, firstly we have simply copied whole code from demo1 to demo2 but along with that we have done following changes in the code -
-
+In the previous demo we've created few of the objects with `kubectl` command line utility but here in the demo we gonna use Manifest (Yaml representation of objects) to deploy a python flask microservice app with Celeris and Redis.
 
 ## Now how to run demo2?
 
-```sh
+```
+kubectl apply -f <manifest>.yaml
 ```
 
 ## Reference for Topics covered post Demo 1
 
+* [Kubernetes-objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
